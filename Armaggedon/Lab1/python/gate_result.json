@@ -1,0 +1,22 @@
+{
+  "gate": "secrets_and_role",
+  "timestamp_utc": "2026-01-10T21:41:22Z",
+  "region": "us-east-1",
+  "instance_id": "i-0e7c35449504c5d21",
+  "secret_id": "bos/rds/mysql",
+  "resolved_instance_profile_arn": "arn:aws:iam::460480222158:instance-profile/bos-instance-profile01",
+  "resolved_role_name": "bos-ec2-role01",
+  "caller_arn": "arn:aws:iam::460480222158:user/AWSCLI",
+  "toggles": {
+    "require_rotation": false,
+    "check_secret_policy_wildcard": true,
+    "check_secret_value_read": false
+  },
+  "status": "PASS",
+  "exit_code": 0,
+  "details": [
+"PASS: aws sts get-caller-identity succeeded (credentials OK).\nPASS: secret exists and is describable (bos/rds/mysql).\nINFO: rotation requirement disabled (REQUIRE_ROTATION=false).\nPASS: no resource policy found (OK) or not applicable (bos/rds/mysql).\nPASS: instance has IAM instance profile attached (i-0e7c35449504c5d21).\nPASS: resolved instance profile -> role (bos-instance-profile01 -> bos-ec2-role01).\nINFO: EXPECTED_ROLE_NAME not set; using resolved role (bos-ec2-role01).\nINFO: on-instance checks skipped (not running as expected role on EC2)."],
+  "warnings": [
+"WARN: current caller ARN is not assumed-role/bos-ec2-role01 (you may be running off-instance)."],
+  "failures": []
+}
