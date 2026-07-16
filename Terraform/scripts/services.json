@@ -1,0 +1,96 @@
+##############################################################
+# Lambda Policy
+##############################################################
+
+resource "aws_iam_policy" "waf_lambda_policy" {
+
+  name = "waf-bedrock-policy"
+
+  policy = jsonencode({
+
+    Version = "2012-10-17"
+
+    Statement = [
+
+##############################################################
+# CloudWatch Logging
+##############################################################
+
+      {
+
+        Effect = "Allow"
+
+        Action = [
+
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+
+        ]
+
+        Resource = "*"
+
+      },
+
+##############################################################
+# Read WAF Logs
+##############################################################
+
+      {
+
+        Effect = "Allow"
+
+        Action = [
+
+          "logs:FilterLogEvents"
+
+        ]
+
+        Resource = aws_cloudwatch_log_group.waf_logs.arn
+
+      },
+
+##############################################################
+# DynamoDB
+##############################################################
+
+      {
+
+        Effect = "Allow"
+
+        Action = [
+
+        "dynamodb:PutItem",
+        "dynamodb:GetItem",
+        "dynamodb:Query",
+        "dynamodb:Scan"
+
+        ]
+
+        Resource = aws_dynamodb_table.waf_events.arn
+
+      },
+
+##############################################################
+# Bedrock
+##############################################################
+
+      {
+
+        Effect = "Allow"
+
+        Action = [
+
+          "bedrock:InvokeModel"
+
+        ]
+
+        Resource = "*"
+
+      }
+
+    ]
+
+  })
+
+}
